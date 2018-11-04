@@ -224,6 +224,11 @@ public final class EmulationFragment extends Fragment implements SurfaceHolder.C
     mInputOverlay.resetButtonPlacement();
   }
 
+  public void shutdownInputOverlay()
+  {
+    mInputOverlay.shutdown();
+  }
+
   @Override
   public void surfaceCreated(SurfaceHolder holder)
   {

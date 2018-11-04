@@ -48,6 +48,7 @@ public final class InputOverlay extends SurfaceView implements OnTouchListener
   private InputOverlayDrawableButton mButtonBeingConfigured;
   private InputOverlayDrawableDpad mDpadBeingConfigured;
   private InputOverlayDrawableJoystick mJoystickBeingConfigured;
+  private InputOverlayGyro minputOverlayGyro;
 
   private SharedPreferences mPreferences;
 
@@ -82,6 +83,8 @@ public final class InputOverlay extends SurfaceView implements OnTouchListener
   {
     super(context, attrs);
 
+    minputOverlayGyro = new InputOverlayGyro(context);
+
     mPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
     if (!mPreferences.getBoolean("OverlayInitV2", false))
       defaultOverlay();
@@ -96,6 +99,11 @@ public final class InputOverlay extends SurfaceView implements OnTouchListener
 
     // Request focus for the overlay so it has priority on presses.
     requestFocus();
+  }
+
+  public void shutdown()
+  {
+    minputOverlayGyro.unRegister();
   }
 
   @Override
