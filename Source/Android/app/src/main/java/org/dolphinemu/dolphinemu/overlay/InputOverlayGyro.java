@@ -106,8 +106,8 @@ public class InputOverlayGyro implements SensorEventListener
 
   class Tilt
   {
-    private static final float TILT_THRESHOLD = 3;
-
+    private static final float TILT_THRESHOLD = 2;
+    private static final float TILT_MODIFIER = 15f;
     public Tilt()
     {
     }
@@ -123,18 +123,18 @@ public class InputOverlayGyro implements SensorEventListener
      */
     private void checkY()
     {
-
       if (data[1] < (TILT_THRESHOLD * -1))
       {
         NativeLibrary.onGamePadMoveEvent(NativeLibrary.TouchScreenDevice,
                 NativeLibrary.ButtonType.WIIMOTE_TILT_LEFT,
-                -1);
+                data[1] / TILT_MODIFIER);
       }
       else if (data[1] > TILT_THRESHOLD)
       {
         NativeLibrary.onGamePadMoveEvent(NativeLibrary.TouchScreenDevice,
                 NativeLibrary.ButtonType.WIIMOTE_TILT_RIGHT,
-                1);
+                data[1] / TILT_MODIFIER);
+
       }
       else
       {
@@ -156,13 +156,13 @@ public class InputOverlayGyro implements SensorEventListener
       {
         NativeLibrary.onGamePadMoveEvent(NativeLibrary.TouchScreenDevice,
                 NativeLibrary.ButtonType.WIIMOTE_TILT_FORWARD,
-                -1);
+                data[0] / TILT_MODIFIER);
       }
       else if (data[0] > TILT_THRESHOLD)
       {
         NativeLibrary.onGamePadMoveEvent(NativeLibrary.TouchScreenDevice,
                 NativeLibrary.ButtonType.WIIMOTE_TILT_BACKWARD,
-                1);
+                data[0] / TILT_MODIFIER);
       }
       else
       {
