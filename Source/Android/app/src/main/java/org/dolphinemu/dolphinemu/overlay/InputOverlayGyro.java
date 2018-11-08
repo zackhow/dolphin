@@ -132,13 +132,18 @@ public class InputOverlayGyro implements SensorEventListener
         NativeLibrary.onGamePadMoveEvent(NativeLibrary.TouchScreenDevice,
                 NativeLibrary.ButtonType.WIIMOTE_TILT_LEFT,
                 data[1] / TILT_MODIFIER);
+        NativeLibrary.onGamePadEvent(NativeLibrary.TouchScreenDevice,
+                NativeLibrary.ButtonType.WIIMOTE_TILT_RIGHT,
+                0);
       }
       else if (data[1] > TILT_THRESHOLD)
       {
         NativeLibrary.onGamePadMoveEvent(NativeLibrary.TouchScreenDevice,
                 NativeLibrary.ButtonType.WIIMOTE_TILT_RIGHT,
                 data[1] / TILT_MODIFIER);
-
+        NativeLibrary.onGamePadEvent(NativeLibrary.TouchScreenDevice,
+                NativeLibrary.ButtonType.WIIMOTE_TILT_LEFT,
+                0);
       }
       else
       {
@@ -161,12 +166,18 @@ public class InputOverlayGyro implements SensorEventListener
         NativeLibrary.onGamePadMoveEvent(NativeLibrary.TouchScreenDevice,
                 NativeLibrary.ButtonType.WIIMOTE_TILT_FORWARD,
                 data[0] / TILT_MODIFIER);
+        NativeLibrary.onGamePadEvent(NativeLibrary.TouchScreenDevice,
+                NativeLibrary.ButtonType.WIIMOTE_TILT_BACKWARD,
+                0);
       }
       else if (data[0] > TILT_THRESHOLD)
       {
         NativeLibrary.onGamePadMoveEvent(NativeLibrary.TouchScreenDevice,
                 NativeLibrary.ButtonType.WIIMOTE_TILT_BACKWARD,
                 data[0] / TILT_MODIFIER);
+        NativeLibrary.onGamePadEvent(NativeLibrary.TouchScreenDevice,
+                NativeLibrary.ButtonType.WIIMOTE_TILT_FORWARD,
+                0);
       }
       else
       {
@@ -196,12 +207,18 @@ public class InputOverlayGyro implements SensorEventListener
         NativeLibrary.onGamePadMoveEvent(NativeLibrary.TouchScreenDevice,
                 NativeLibrary.ButtonType.WIIMOTE_SWING_UP,
                 data[2] / SWING_MODIFIER);
+        NativeLibrary.onGamePadEvent(NativeLibrary.TouchScreenDevice,
+                NativeLibrary.ButtonType.WIIMOTE_SWING_DOWN,
+                0);
       }
       else if (data[2] > SWING_THRESHOLD)
       {
         NativeLibrary.onGamePadMoveEvent(NativeLibrary.TouchScreenDevice,
                 NativeLibrary.ButtonType.WIIMOTE_SWING_DOWN,
                 data[2] / SWING_MODIFIER);
+        NativeLibrary.onGamePadEvent(NativeLibrary.TouchScreenDevice,
+                NativeLibrary.ButtonType.WIIMOTE_SWING_UP,
+                0);
       }
       else
       {
