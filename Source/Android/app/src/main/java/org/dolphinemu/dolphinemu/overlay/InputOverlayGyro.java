@@ -21,6 +21,7 @@ public class InputOverlayGyro implements SensorEventListener
   private long lastUpdate = 0;
   private Shake shake;
   private Tilt tilt;
+  private Swing swing;
 
   private Handler handler;
 
@@ -42,6 +43,8 @@ public class InputOverlayGyro implements SensorEventListener
     handler = new Handler();
     shake = new Shake(NativeLibrary.ButtonType.WIIMOTE_SHAKE_X);
     tilt = new Tilt();
+    swing = new Swing();
+
   }
 
   public void unRegister()
@@ -74,6 +77,7 @@ public class InputOverlayGyro implements SensorEventListener
   {
     shake.check();
     tilt.check();
+    swing.check();
   }
 
   class Shake
@@ -171,6 +175,41 @@ public class InputOverlayGyro implements SensorEventListener
                 0);
         NativeLibrary.onGamePadEvent(NativeLibrary.TouchScreenDevice,
                 NativeLibrary.ButtonType.WIIMOTE_TILT_BACKWARD,
+                0);
+      }
+    }
+  }
+
+  class Swing
+  {
+    private static final float SWING_THRESHOLD = 1.5f;
+    private static final float SWING_MODIFIER = 15f;
+
+    public Swing()
+    {
+    }
+
+    public void check()
+    {
+      if (data[2] < (SWING_THRESHOLD * -1))
+      {
+        NativeLibrary.onGamePadMoveEvent(NativeLibrary.TouchScreenDevice,
+                NativeLibrary.ButtonType.WIIMOTE_SWING_UP,
+                data[2] / SWING_MODIFIER);
+      }
+      else if (data[2] > SWING_THRESHOLD)
+      {
+        NativeLibrary.onGamePadMoveEvent(NativeLibrary.TouchScreenDevice,
+                NativeLibrary.ButtonType.WIIMOTE_SWING_DOWN,
+                data[2] / SWING_MODIFIER);
+      }
+      else
+      {
+        NativeLibrary.onGamePadEvent(NativeLibrary.TouchScreenDevice,
+                NativeLibrary.ButtonType.WIIMOTE_SWING_UP,
+                0);
+        NativeLibrary.onGamePadEvent(NativeLibrary.TouchScreenDevice,
+                NativeLibrary.ButtonType.WIIMOTE_SWING_DOWN,
                 0);
       }
     }
